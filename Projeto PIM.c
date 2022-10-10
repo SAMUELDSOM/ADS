@@ -9,7 +9,6 @@ Code, Compile, Run and Debug online from anywhere in world.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 int main()
 {
     char nome[20];
