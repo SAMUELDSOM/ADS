@@ -20,7 +20,7 @@ int main()
 
     FILE *file;
     
-    /*Abrindo arquivo*/
+    //Abrindo arquivo
     file = fopen("Alunos_Unip", "a");
     if(file == NULL){
         printf("não deu mermão");
