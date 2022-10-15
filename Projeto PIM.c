@@ -37,6 +37,7 @@ int main()
         printf("não deu mermão");
         return 1;
         }  
+        opcao = 1;
         while(opcao != 0){
         gets(nome);
     
@@ -76,7 +77,8 @@ int main()
             printf("%s", linha);
         }
         }
-        printf("\nDigite 0 para continuar:");
+        fclose(file);
+        printf("Digite 0 para continuar:");
         scanf("%d", &op2);
         system("cls");
         break;
