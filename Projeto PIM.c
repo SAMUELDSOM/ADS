@@ -1,15 +1,40 @@
 /******************************************************************************
 
-Welcome to GDB Online.
-GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
-C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
-Code, Compile, Run and Debug online from anywhere in world.
+Comente sempre que alterar.
 
 *******************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+
+void name(char *NM, FILE *fi){
+    printf("Nome:\n");
+    gets(NM);
+    fprintf(fi, "%s; ", NM);
+
+  return;
+}
+void phone(char *nu, FILE *fl){
+    printf("Numero:\n");
+    gets(nu);
+    fprintf(fl, "%s; ", nu);
+    
+  return;
+}
+void CPF(char *pf, FILE *fe){
+    printf("CPF:\n");
+    gets(pf);
+    fprintf(fe, "%s; ", pf);
+
+  return;
+}
+void gmail(char *email, FILE *fi){
+    printf("E-MAIL:\n");
+    scanf("%s", email);
+    fprintf(fi, "%s\n", email);
+}
+
 int main()
 {
     char nome[50], cpf[11], fone[50], linha[50], e_mail[20];
@@ -41,32 +66,25 @@ int main()
         while(opcao != 0){
         gets(nome);
     
-        printf("Nome:\n");
-        gets(nome);
-        fprintf(file, "%s; ", nome);
+        name(nome, file);
         system("cls");
-        printf("Numero:\n");
-        gets(fone);
-        fprintf(file, "%s; ", fone);
+        phone(fone, file);
         system("cls");
-        printf("CPF:\n");
-        gets(cpf);
-        fprintf(file, "%s; ", cpf);
+        CPF(cpf, file);
         system("cls");
-        printf("E-MAIL:\n");
-        scanf("%s", e_mail);
-        fprintf(file, "%s\n", e_mail);
+        gmail(e_mail, file);
         system("cls");
-        printf("Cadastro executado com sucesso...\n");
-        printf("Vamos continuar?(se nao,digite 0):\n");
-        scanf("%d", &opcao);
-        system("cls");
+
+            printf("Cadastro executado com sucesso...\n");
+            printf("Vamos continuar?(se nao,digite 0):\n");
+            scanf("%d", &opcao);
+            system("cls");
         }
         fclose(file);
-        break; 
+    break; 
      
     case 2:
-    file = fopen("Alunos_Unip", "r");
+    file = fopen("Alunos_Unip.txt", "r");
     if(file == NULL){
         printf("não deu mermão");
         return 1;
@@ -85,5 +103,6 @@ int main()
     }
     
  }
+    
     return 0;
 }
