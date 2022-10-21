@@ -32,18 +32,25 @@ void CPF(char *pf, FILE *fe){
 void gmail(char *email, FILE *fi){
     printf("E-MAIL:\n");
     scanf("%s", email);
-    fprintf(fi, "%s\n", email);
+    fprintf(fi, "%s; ", email);
+}
+void Acess(char *SN, FILE *arqv){
+    printf("Crie uma senha(com 8 digitos):\n");
+    scanf("%s", SN);
+    fprintf(arqv, "%s\n", SN);
 }
 
 int main()
 {
-    char nome[50], cpf[11], fone[50], linha[50], e_mail[20];
+    char nome[50], cpf[11], fone[50], linha[50], e_mail[20], senha[8];
     int cont = 5;
     int opcao = 1;
     int op2 = 0;
-    char *resultado;
+    //char *resultado;
 
     FILE *file;
+
+    
     while (op2 == 0)
  {
     
@@ -74,6 +81,8 @@ int main()
         system("cls");
         gmail(e_mail, file);
         system("cls");
+        Acess(senha, file);
+        system("cls");
 
             printf("Cadastro executado com sucesso...\n");
             printf("Vamos continuar?(se nao,digite 0):\n");
@@ -88,18 +97,31 @@ int main()
     if(file == NULL){
         printf("não deu mermão");
         return 1;
+    }
+    char login[15];
+    char Senha[15];        
+    int login_efetuado = 0; //0 - Falso e  1 - Verdadeiro
+
+    /*Tela de login*/
+    while(!login_efetuado){
+        printf("Digite o Login: ");
+        scanf("%s", login);
+
+        printf("Digite a Senha: ");
+        scanf("%s", Senha);
+        /* trabalhando nessa parte do codigo*/
+        /*if (strcmp(login, cpf) == 0 && strcmp(Senha, senha) == 0){
+            
+            printf("\n\nLOGADO!\n\n");
+            login_efetuado = 1;
         }
-        while(!feof(file)){
-       resultado = fgets(linha, 41, file);
-        if(resultado){
-            printf("%s", linha);
-        }
-        }
-        fclose(file);
-        printf("Digite 0 para continuar:");
-        scanf("%d", &op2);
-        system("cls");
-        break;
+        else
+            
+            printf("\n\nDADOS INVALIDOS!\n\n");
+        */      
+    }
+    fclose(file);
+    
     }
     
  }
