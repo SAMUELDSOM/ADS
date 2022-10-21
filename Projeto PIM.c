@@ -56,9 +56,9 @@ int main()
     switch (cont)
     {
     case 1:
-    //Abrindo arquivo
-    file = fopen("Alunos_Unip", "a");
-    if(file == NULL){
+     //Abrindo arquivo
+     file = fopen("Alunos_Unip.txt", "wt");
+     if(file == NULL){
         printf("não deu mermão");
         return 1;
         }  
