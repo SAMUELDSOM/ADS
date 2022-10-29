@@ -7,124 +7,122 @@ Comente sempre que alterar.
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#define SIZE 50
 
-void name(char *NM, FILE *fi){
-    printf("Nome:\n");
-    gets(NM);
-    fprintf(fi, "%s; ", NM);
+char nome[SIZE][200], cpf[11][200], fone[SIZE][200], linha[SIZE][200], e_mail[SIZE][200], senha[8][200];
 
-  return;
-}
-void phone(char *nu, FILE *fl){
-    printf("Numero:\n");
-    gets(nu);
-    fprintf(fl, "%s; ", nu);
-    
-  return;
-}
-void CPF(char *pf, FILE *fe){
-    printf("CPF:\n");
-    gets(pf);
-    fprintf(fe, "%s; ", pf);
-
-  return;
-}
-void gmail(char *email, FILE *fi){
-    printf("E-MAIL:\n");
-    scanf("%s", email);
-    fprintf(fi, "%s; ", email);
-}
-void Acess(char *SN, FILE *arqv){
-    printf("Crie uma senha(com 8 digitos):\n");
-    scanf("%s", SN);
-    fprintf(arqv, "%s\n", SN);
-}
+void cadastro();
+void login();
 
 int main()
 {
-    char nome[50], cpf[11], fone[50], linha[50], e_mail[20], senha[8];
-    int cont = 5;
-    int opcao = 1;
-    int op2 = 0;
-    //char *resultado;
+ int cont = 5;
+ int op2 = 0;
+ FILE *file;
 
-    FILE *file;
-
-    
     while (op2 == 0)
- {
-    
-    printf("\n\tINVESTIMENTOS SSC\n\n");
-    printf("Digite 1 para se cadastrar:\n");
-    printf("Digite 2 se já tem cadastro:\n");
-    scanf("%d", &cont);
-    system("cls");
-
-    switch (cont)
     {
-    case 1:
-     //Abrindo arquivo
-     file = fopen("Alunos_Unip.txt", "wt");
-     if(file == NULL){
-        printf("não deu mermão");
-        return 1;
-        }  
-        opcao = 1;
-        while(opcao != 0){
-        gets(nome);
-    
-        name(nome, file);
-        system("cls");
-        phone(fone, file);
-        system("cls");
-        CPF(cpf, file);
-        system("cls");
-        gmail(e_mail, file);
-        system("cls");
-        Acess(senha, file);
+        printf("\n\tINVESTIMENTOS SSC\n\n");
+        printf("Digite 1 para cadastrar um usuario:\n");
+        printf("Digite 2 se já tem cadastro:\n");
+        scanf("%d", &cont);
         system("cls");
 
-            printf("Cadastro executado com sucesso...\n");
-            printf("Vamos continuar?(se nao,digite 0):\n");
-            scanf("%d", &opcao);
-            system("cls");
-        }
-        fclose(file);
-    break; 
+        switch (cont)
+        {
+
+         /*Tela de cadastro*/
+         case 1:
+         file = fopen("Usuarios", "a");
+            if(file == NULL){
+             printf("não deu mermão");
+             return 1;
+            } 
+   
+         cadastro(file);/*Chama a função de cadastro de usuário*/ 
+        
+         fclose(file);
+         break; 
      
-    case 2:
-    file = fopen("Alunos_Unip.txt", "r");
-    if(file == NULL){
-        printf("não deu mermão");
-        return 1;
-    }
-    char login[15];
-    char Senha[15];        
-    int login_efetuado = 0; //0 - Falso e  1 - Verdadeiro
-
-    /*Tela de login*/
-    while(!login_efetuado){
-        printf("Digite o Login: ");
-        scanf("%s", login);
-
-        printf("Digite a Senha: ");
-        scanf("%s", Senha);
-        /* trabalhando nessa parte do codigo*/
-        /*if (strcmp(login, cpf) == 0 && strcmp(Senha, senha) == 0){
+         /*Tela de login*/
+         case 2:
+         file = fopen("Usuarios", "r");
+            if(file == NULL){
+             printf("não deu mermão");
+             return 1;
+            }
+         char linha[50];
+         char usua[20];
+         char login[50];
+         char login2[20];
+         char senha1[20];
+         char senha2[20];
+         char *retorno;
             
-            printf("\n\nLOGADO!\n\n");
-            login_efetuado = 1;
+         int login_efetuado = 0; //0 - Falso e  1 - Verdadeiro
+
+            printf("Digite o Login:\n");
+            scanf("%s", login);
+            printf("Digite a Senha:\n");
+            scanf("%s", senha1); 
+            system("cls");
+
+            while ((fscanf(file, "%s ; %s\n", login2, senha2)) != EOF)/*Comparando dados do arquivo "Usuarios.txt" com os dados de entrada*/
+            {
+                if (strcmp(login, login2) == 0 && strcmp(senha1, senha2)== 0){
+                 printf("\n\n\t%s LOGADO!\n\n", login2);
+                 login_efetuado = 1;
+                 /*O restante do codigo será desenvolvido dentro deste IF, pois somente dentro dele
+                 é possivel a validação dos dados de login*/
+                }   
+            }
+
+            if (login_efetuado != 1){
+             printf("\n\n\tDADOS INVALIDOS!\n");
+             printf("CADASTRE-SE OU TENTE NOVAMENTE\n\n");
+            }
+        
+            
+    
+
+         fclose(file);
+         break;
         }
-        else
-            
-            printf("\n\nDADOS INVALIDOS!\n\n");
-        */      
     }
-    fclose(file);
-    
-    }
-    
- }
-    
-    return 0;
+ return 0;
+}
+/*Função para cadastro de usuário*/
+void cadastro(FILE *fi)
+{
+    int opcao;
+ 
+    do
+    {
+     gets(nome);
+     printf("Escolha um nome de usuario:\n");
+     gets(nome);
+     fprintf(fi, "%s ; ", nome);
+     printf("*----------------------------------------------------------------------------------------*\n");
+     printf("Crie uma senha(com 8 digitos):\n");
+     gets(senha);
+     fprintf(fi, "%s\n", senha);
+     system("cls");
+     printf("*----------------------------------------------------------------------------------------*\n");
+     printf("Cadastro executado com sucesso...\n");
+     printf("*----------------------------------------------------------------------------------------*\n");
+     printf("Digite 1 para ver seus dados de cadastro.\nDigite 2 para sair.\n");
+     scanf("%d", &opcao);
+     system("cls");
+        if (opcao == 1){
+            while (opcao == 1)
+            {
+                printf("Nome de usuario: %s\n", nome);
+                printf("Senha: %s\n", senha);
+                printf("*----------------------------------------------------------------------------------------*\n");
+                printf(".\nDigite 1 para ver seu cadastro.\nDigite 2 para sair.\n");
+                scanf("%d", &opcao);
+                system("cls");
+            }
+        }
+    } while (opcao == 0);
 }
