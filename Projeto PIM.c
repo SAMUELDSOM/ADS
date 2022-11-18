@@ -12,7 +12,7 @@ Comente sempre que alterar.
 char nome[SIZE][200], cpf[11][200], fone[SIZE][200], linha[SIZE][200], cnpj[14][200], senha[8][200];
 
 void cadastro();
-void login();
+void componente();
 
 int main()
 {
@@ -79,13 +79,22 @@ int main()
                         printf("Cadastrar cliente (digite 1)\n");//Lucas
                         printf("Cadastrar funcionario (digite 2)\n");//Kaue
                         printf("");//Samuel
-                        printf("Relatorios(digite 3)\n");//Samuel e Vieira
+                        printf("Relatorios(digite 4)\n");//Samuel e Vieira
                         scanf("%d", &sair);
 
                         switch (sair)
                         {
                          case 1:
-                            /* code */
+                            //Lucas
+                            break;
+                         case 2:
+                            //Kaue
+                            break;
+                         case 3:
+                            //Samuel
+                            break;
+                         case 4:
+                            //Samuel e Vieira
                             break;
                         
                          default:
@@ -111,6 +120,41 @@ int main()
 }
 //Função para cadastro de usuário
 void cadastro(FILE *fi)
+{
+    int opcao;
+ 
+    do
+    {
+     gets(nome);
+     printf("Escolha um nome de usuario:\n");
+     gets(nome);
+     fprintf(fi, "%s ; ", nome);
+     printf("*----------------------------------------------------------------------------------------*\n");
+     printf("Crie uma senha(com 8 digitos):\n");
+     gets(senha);
+     fprintf(fi, "%s\n", senha);
+     system("cls");
+     printf("*----------------------------------------------------------------------------------------*\n");
+     printf("Cadastro executado com sucesso...\n");
+     printf("*----------------------------------------------------------------------------------------*\n");
+     printf("Digite 1 para ver seus dados de cadastro.\nDigite 2 para sair.\n");
+     scanf("%d", &opcao);
+     system("cls");
+        if (opcao == 1){
+            while (opcao == 1)
+            {
+                printf("Nome de usuario: %s\n", nome);
+                printf("Senha: %s\n", senha);
+                printf("*----------------------------------------------------------------------------------------*\n");
+                printf(".\nDigite 1 para ver seu cadastro.\nDigite 2 para sair.\n");
+                scanf("%d", &opcao);
+                system("cls");
+            }
+        }
+    } while (opcao == 0);
+}
+
+void componente(FILE *fi)
 {
     int opcao;
  
