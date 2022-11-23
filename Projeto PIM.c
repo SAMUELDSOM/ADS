@@ -9,10 +9,10 @@ Comente sempre que alterar.
 #include <math.h>
 #define SIZE 50
 
-char nome[SIZE][200], cpf[11][200], fone[SIZE][200], linha[SIZE][200], cnpj[14][200], senha[8][200];
+char nome[SIZE][200],senha[8][200];
 
 void cadastro();
-void componente();
+void servico();
 
 int main()
 {
@@ -51,8 +51,6 @@ int main()
              printf("não deu mermão");
              return 1;
             }
-         char linha[50];
-         char usua[20];
          char login[50];
          char login2[20];
          char senha1[20];
@@ -78,7 +76,7 @@ int main()
                         printf("\n\tMENU INICIAL\n\n");
                         printf("Cadastrar cliente (digite 1)\n");//Lucas
                         printf("Cadastrar funcionario (digite 2)\n");//Kaue
-                        printf("");//Samuel
+                        printf("Nova ordem de serviço (digite 3)\n");//Samuel
                         printf("Relatorios(digite 4)\n");//Samuel e Vieira
                         scanf("%d", &sair);
 
@@ -91,7 +89,16 @@ int main()
                             //Kaue
                             break;
                          case 3:
-                            //Samuel
+                            file = fopen("serviço.txt", "a");
+                            if(file == NULL){
+                            printf("não deu mermão");
+                            return 1;
+                            } 
+
+                            servico(file);
+
+                            fclose(file);
+
                             break;
                          case 4:
                             //Samuel e Vieira
@@ -154,37 +161,206 @@ void cadastro(FILE *fi)
     } while (opcao == 0);
 }
 
-void componente(FILE *fi)
+void servico(FILE *fl)
 {
-    int opcao;
- 
-    do
-    {
-     gets(nome);
-     printf("Escolha um nome de usuario:\n");
-     gets(nome);
-     fprintf(fi, "%s ; ", nome);
-     printf("*----------------------------------------------------------------------------------------*\n");
-     printf("Crie uma senha(com 8 digitos):\n");
-     gets(senha);
-     fprintf(fi, "%s\n", senha);
-     system("cls");
-     printf("*----------------------------------------------------------------------------------------*\n");
-     printf("Cadastro executado com sucesso...\n");
-     printf("*----------------------------------------------------------------------------------------*\n");
-     printf("Digite 1 para ver seus dados de cadastro.\nDigite 2 para sair.\n");
-     scanf("%d", &opcao);
-     system("cls");
-        if (opcao == 1){
-            while (opcao == 1)
-            {
-                printf("Nome de usuario: %s\n", nome);
-                printf("Senha: %s\n", senha);
-                printf("*----------------------------------------------------------------------------------------*\n");
-                printf(".\nDigite 1 para ver seu cadastro.\nDigite 2 para sair.\n");
-                scanf("%d", &opcao);
-                system("cls");
-            }
+    char funcio[60], clint[60];
+    char*nome_comp=NULL;
+    char*tipo_serv=NULL;
+    int comp, tserv;
+    float valor;
+
+        gets(funcio);
+        printf("\nFuncionário responsável pela OS: \n");
+        gets(funcio);
+        fprintf(fl, "%s ; ", funcio);
+        //Necessaria base de funcionarios
+
+        printf("\nCliente: \n");
+        gets(clint);
+        fprintf(fl, "%s ; ", clint);
+        //Necessaria base de clientes
+
+        printf ("\n--------------------------------------------------------------------------------\n");
+        printf("Componente a ser revisado:\n1-Distribuidora\n2-Bomba_de_combustivel\n3-Dosadora\n4-Carburador\n5-Magneto\n6-Alternador\n7-Motor_de_partida\n");
+        scanf("%d", &comp);
+        printf ("\n--------------------------------------------------------------------------------\n");
+
+        switch (comp)
+        {
+        case 1:
+            nome_comp = "Distribuidora";
+            fprintf(fl, "%s ; ", nome_comp);
+            printf("O componente escolido foi uma %s.", nome_comp);
+            printf ("\n--------------------------------------------------------------------------------\n");
+            break;
+        case 2:
+        
+            nome_comp = "Bomba_de_combustivel";
+            fprintf(fl, "%s ; ", nome_comp);
+            printf("O componente escolido foi uma %s.", nome_comp);
+            printf ("\n--------------------------------------------------------------------------------\n");
+            break;
+        case 3:
+        
+            nome_comp = "Dosadora";
+            fprintf(fl, "%s ; ", nome_comp);
+            printf("O componente escolido foi uma %s.", nome_comp);
+            printf ("\n--------------------------------------------------------------------------------\n");
+            break;
+        case 4:
+        
+            nome_comp = "Carburador";
+            fprintf(fl, "%s ; ", nome_comp);
+            printf("O componente escolido foi um %s.", nome_comp);
+            printf ("\n--------------------------------------------------------------------------------\n");
+            break;
+        case 5:
+        
+            nome_comp = "Magneto";
+            fprintf(fl, "%s ; ", nome_comp);
+            printf("O componente escolido foi um %s.", nome_comp);
+            printf ("\n--------------------------------------------------------------------------------\n");
+            break;
+        case 6:
+        
+            nome_comp = "Alternador";
+            fprintf(fl, "%s ; ", nome_comp);
+            printf("O componente escolido foi um %s.", nome_comp);
+            printf ("\n--------------------------------------------------------------------------------\n");
+            break; 
+        case 7:
+        
+            nome_comp = "Motor_de_partida";
+            fprintf(fl, "%s ; ", nome_comp);
+            printf("O componente escolido foi um %s.", nome_comp);
+            printf ("\n--------------------------------------------------------------------------------\n");
+            break;       
+        default:
+        printf("!Componente inválido!");
+        printf ("\n--------------------------------------------------------------------------------\n");
         }
-    } while (opcao == 0);
+
+        printf("Tipo de revisao:\n1-Revisão geral\n2-Revisao de 500 horas\n3-Revisao 100 horas\n4-Revisao parcial\n");
+        scanf("%d", &tserv);
+        printf ("\n--------------------------------------------------------------------------------\n");
+
+        switch (tserv)
+        {
+        case 1:
+            tipo_serv = "Revisão_geral";
+                if (strcmp(nome_comp, "Distribuidora") == 0){
+                    valor = 1.800;
+                }
+                    if (strcmp(nome_comp, "Bomba_de_combustivel") == 0){
+                        valor = 1.800;
+                    }
+                        if (strcmp(nome_comp, "Dosadora") == 0){
+                            valor = 1.800;
+                        }
+                            if (strcmp(nome_comp, "Carburador") == 0){
+                                valor = 1.800;
+                            }
+                        if (strcmp(nome_comp, "Magneto") == 0){
+                            valor = 1.800;
+                        }
+                    if (strcmp(nome_comp, "Alternador") == 0){
+                        valor = 1.800;
+                    }
+                if (strcmp(nome_comp, "Motor_de_partida") == 0){
+                    valor = 1.800;
+                }
+            /*fprintf(fl, "%s ; ", tipo_serv);
+            fprintf(fl, "%s\n", valor);*/         
+            printf("O tipo de revisão escolida foi uma %s, no valor de %.3f.", tipo_serv, valor);
+            printf ("\n--------------------------------------------------------------------------------\n");
+            break;
+        case 2:
+        
+            tipo_serv = "Revisao_de_500 horas";
+                if (strcmp(nome_comp, "Distribuidora") == 0){
+                    valor = 1.800;
+                }
+                    if (strcmp(nome_comp, "Bomba_de_combustivel") == 0){
+                        valor = 1.800;
+                    }
+                        if (strcmp(nome_comp, "Dosadora") == 0){
+                            valor = 1.800;
+                        }
+                            if (strcmp(nome_comp, "Carburador") == 0){
+                                valor = 1.800;
+                            }
+                        if (strcmp(nome_comp, "Magneto") == 0){
+                            valor = 1.800;
+                        }
+                    if (strcmp(nome_comp, "Alternador") == 0){
+                        valor = 1.800;
+                    }
+                if (strcmp(nome_comp, "Motor_de_partida") == 0){
+                    valor = 1.800;
+                } 
+            fprintf(fl, "%s ; ", tipo_serv);
+            fprintf(fl, "%s\n", valor);    
+            printf("O tipo de revisão escolida foi uma %s, no valor de %.3f.", tipo_serv , valor);
+            printf ("\n--------------------------------------------------------------------------------\n");
+            break;
+        case 3:
+        
+            tipo_serv = "Revisao_100_horas";
+                if (strcmp(nome_comp, "Distribuidora") == 0){
+                    valor = 1.800;
+                }
+                    if (strcmp(nome_comp, "Bomba_de_combustivel") == 0){
+                        valor = 1.800;
+                    }
+                        if (strcmp(nome_comp, "Dosadora") == 0){
+                            valor = 1.800;
+                        }
+                            if (strcmp(nome_comp, "Carburador") == 0){
+                                valor = 1.800;
+                            }
+                        if (strcmp(nome_comp, "Magneto") == 0){
+                            valor = 1.800;
+                        }
+                    if (strcmp(nome_comp, "Alternador") == 0){
+                        valor = 1.800;
+                    }
+                if (strcmp(nome_comp, "Motor_de_partida") == 0){
+                    valor = 1.800;
+                } 
+            fprintf(fl, "%s ; ", tipo_serv);
+            fprintf(fl, "%s\n", valor);
+            printf("O tipo de revisão escolida foi uma %s, no valor de %.3f.", tipo_serv , valor);
+            printf ("\n--------------------------------------------------------------------------------\n");
+            break;
+        case 4:
+        
+            tipo_serv = "Revisao_parcial";
+                if (strcmp(nome_comp, "Distribuidora") == 0){
+                    valor = 1.800;
+                }
+                    if (strcmp(nome_comp, "Bomba_de_combustivel") == 0){
+                        valor = 1.800;
+                    }
+                        if (strcmp(nome_comp, "Dosadora") == 0){
+                            valor = 1.800;
+                        }
+                            if (strcmp(nome_comp, "Carburador") == 0){
+                                valor = 1.800;
+                            }
+                        if (strcmp(nome_comp, "Magneto") == 0){
+                            valor = 1.800;
+                        }
+                    if (strcmp(nome_comp, "Alternador") == 0){
+                        valor = 1.800;
+                    }
+                if (strcmp(nome_comp, "Motor_de_partida") == 0){
+                    valor = 1.800;
+                } 
+            fprintf(fl, "%s ; ", tipo_serv);
+            fprintf(fl, "%s\n", valor);
+            printf("O tipo de revisão escolida foi uma %s, no valor de %.3f.", tipo_serv , valor);
+            printf ("\n--------------------------------------------------------------------------------\n");
+            break;
+        
+        }    
 }
