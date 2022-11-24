@@ -17,6 +17,7 @@ float valor;
 
 void cadastro();
 void servico();
+void cliente();
 
 int main()
 {
@@ -26,7 +27,7 @@ int main()
 
     while (op2 == 0)
     {
-        printf("\n\tINVESTIMENTOS SSC\n\n");
+        printf("\n\tAIRcoDe\n\n");
         printf("Digite 1 para cadastrar um usuario:\n");
         printf("Digite 2 se já tem cadastro:\n");
         scanf("%d", &cont);
@@ -85,22 +86,41 @@ int main()
                         printf("Relatorios(digite 4)\n");//Samuel e Vieira
                         printf("Para retornar a tela de login(digite 0)\n");
                         scanf("%d", &sair);
+                        system("cls");
 
                         switch (sair)
                         {
                          case 1:
-                            //Lucas
+
+                            //ABERTURA DO ARQUIVO PARA GRAVACAO
+                            file = fopen("clientes.txt","a");
+                            if(file == NULL){
+                            printf ("ERROR !! CONTATE O ADIM");
+                            return 1;
+                            }
+                            
+                            cliente(file);
+
+                            fclose(file);
+
                             break;
                          case 2:
                             //Kaue
                             break;
                          case 3:
+
                             file = fopen("serviço.txt", "a");
                             if(file == NULL)
                             {
                                 printf("não deu mermão");
                                 return 1;
                             } 
+
+                                gets(funcio);
+                                printf("\nFuncionário responsável pela OS: \n");
+                                gets(funcio);
+                                fprintf(file, "%s;", funcio);
+                                //Necessaria base de funcionarios                              
 
                                 servico(file);
 
@@ -168,7 +188,7 @@ void cadastro(FILE *fi)
      gets(nome);
      printf("Escolha um nome de usuario:\n");
      gets(nome);
-     fprintf(fi, "%s ; ", nome);
+     fprintf(fi, "%s;", nome);
      printf("*----------------------------------------------------------------------------------------*\n");
      printf("Crie uma senha(com 8 digitos):\n");
      gets(senha);
@@ -198,15 +218,11 @@ void servico(FILE *fl)
 {
     int comp, tserv;
 
-        gets(funcio);
-        printf("\nFuncionário responsável pela OS: \n");
-        gets(funcio);
-        fprintf(fl, "%s ; ", funcio);
-        //Necessaria base de funcionarios
+        
 
         printf("\nCliente: \n");
         gets(clint);
-        fprintf(fl, "%s ; ", clint);
+        fprintf(fl, "%s;", clint);
         //Necessaria base de clientes
 
         while (comp<1 || comp>7)
@@ -411,4 +427,137 @@ void servico(FILE *fl)
             printf ("\n--------------------------------------------------------------------------------\n"); 
             system("cls");
                  
+}
+
+void cliente(FILE*Cadastro_cliente)
+{
+    //DECLARACAO DE VARIAVEIS           //* A MAIORIA DAS STRING RECEBEM UMA CASA A MAIS POR CONTA DO \0 OU \n *//
+    char CPF[12][100],nome_cliente[50][100],Contato1[11][50],Contato[12][50],CEP[50][50],mail[50][50],cnpj[14][50];
+    char IES [13][50];
+    int dgcnpj; //VARIAVEL PRESENTE DENTRO WHILE CNPJ
+    int cont=0; //VARIAVEL SWITCH
+    int VCPF =1; //VARIAVEL WHILE CPF
+    int VCNPJ =1;//VARIAVEL WHILE CNPJ
+
+
+     //ENTRADA NO SWITCH E ESCOLHA DE CADASTRO
+    printf("*----------------------------------------------------------------------------------------*\n");
+    printf("*-----------------------------TELA DE CADASTRO-------------------------------------------*\n");
+    printf("*---------------------(CADASTRO CPF = 1)--(CADASTRO CNPJ = 2)----------------------------*\n");
+    printf("\nDIGITE A SUA OPCAO...:");
+    scanf("%d",&cont);
+    system("cls");
+
+
+    switch(cont)
+    {
+     case 1:
+
+        
+            // CADASTRO DE CLIENTE COM CPF
+            while(VCPF ==1){
+                printf("*-----------------------------CADASTRO CPF-------------------------------------------*\n");
+
+                gets(CPF);
+                printf("\nDIGITE O CPF...:");
+                gets(CPF);
+                fprintf(Cadastro_cliente,"%s;",CPF);
+                fflush(stdin); // LIMPAR BUFFER PARA EVITAR TRANSTORNOS
+
+                printf("\nDIGITE O NOME DO CLIENTE...:");
+                scanf("%[^\n]s", &nome_cliente); // "[^\n] PERMITE A LEITURA DO ESPAÇO ENTRE OS NOMES. & APONTAMENTO NA MEMORIA.
+                fprintf(Cadastro_cliente,"%s;",nome_cliente);                                 //NAO APRESENTOU FALHAS EU USEI.
+                fflush(stdin);
+
+                printf("\nDIGITE O NUMERO DO TELEFONE...:");
+                gets(Contato1);
+                fprintf(Cadastro_cliente,"%s;",Contato1); //SEPARACAO POR PONTO E VIRUGLA PARA UM USO FUTURO.
+                fflush(stdin);
+
+                printf("\nDIGITE O NUMERO DO CELULAR...:");
+                gets(Contato);
+                fprintf(Cadastro_cliente,"%s;",Contato);
+                fflush(stdin);
+
+                printf("\nDIGITE APENAS OS NUMEROS DO CEP...:");
+                gets(CEP);
+                fprintf(Cadastro_cliente,"%s;",CEP);
+                fflush(stdin);
+
+                printf("\nDIGITE O E-MAIL...:");
+                gets(mail);
+                fprintf(Cadastro_cliente,"%s\n",mail);
+                fflush(stdin);
+
+                printf("\nDESEJA CONTINUAR CADASTRANDO ?(SIM -1 / NAO -2) :");//CASO O USUARIO DESEJE CADASTRAR OUTRO CLIENTE
+                scanf("%d",&VCPF);
+                fflush(stdin);
+                printf("*----------------------------------------------------------------------------------------*\n");
+                printf("*-------------------------CADASTRO CONCLUIDO COM SUCESSO---------------------------------*\n");
+                printf("*----------------------------------------------------------------------------------------*\n");
+
+     break;
+        }
+
+
+     case 2 :
+        
+            //CADASTRO DE CLIENTE COM CNPJ
+           while(VCNPJ==1){
+            printf("*-----------------------------CADASTRO CNPJ-------------------------------------------*\n");
+
+            fflush(stdin);
+            printf("\nDigite o CNPJ do cliente...:");
+            gets(cnpj);
+            fprintf(Cadastro_cliente, "%s;" , cnpj);
+            fflush(stdin);
+            printf("\nCLIENTE POSSUI INSCRICAO ESTADUAL? (SIM -1/ NAO-2) :");
+            scanf("%d",&dgcnpj);
+            fflush(stdin);
+             if(dgcnpj == 1){                                   //A CASOS EM QUE PESSOAS JURIDICAS POSSUEM INSCRICAO ESTADUAL
+                 fflush(stdin);
+                 printf("\nDigite a inscricao estadual...:");   //DEVIDO A ISSO ESSA CONDICIONAL EXISTE
+                 gets(IES);
+                 fprintf(Cadastro_cliente,"%s;",IES);
+                 fflush(stdin);
+                }else if(dgcnpj !=1){
+                   strcpy (IES,"000000000000");
+                   }
+            fflush(stdin);
+            printf("\nDIGITE A IDENTIFICACAO DO CLIENTE....:");
+            scanf("%[^\n]s",nome_cliente); // "[^\n] PERMITE A LEITURA DO ESPAÇO ENTRE OS NOMES. & APONTAMENTO NA MEMORIA.
+            fprintf(Cadastro_cliente,"%s;", nome_cliente);
+            fflush(stdin);
+
+            printf("\nDigite o CEP..:");
+            gets(CEP);
+            fprintf(Cadastro_cliente,"%s;",CEP); //CADASTRO DO CEP
+            fflush(stdin);
+
+            printf("\nDIGITE O NUMERO DO TELEFONE...:");
+            gets(Contato1);
+            fprintf(Cadastro_cliente,"%s;",Contato1); //CADASTRO DO TELEFONE
+            fflush(stdin);
+
+            printf("\nDIGITE O NUMERO DO CELULAR...:");
+            gets(Contato);
+            fprintf(Cadastro_cliente,"%s;",Contato);   //CADASTRO DE CELULAR
+            fflush(stdin);
+
+            printf("\nDIGITE O E-MAIL...:");
+            gets(mail);
+            fprintf(Cadastro_cliente,"%s\n",mail);
+            fflush(stdin);
+
+            printf("\nDESEJA CONTINUAR CADASTRANDO ?(SIM -1 / NAO -2) :");//CASO O USUARIO DESEJE CADASTRAR OUTRO CLIENTE
+            scanf("%d",&VCNPJ);
+                printf("*----------------------------------------------------------------------------------------*\n");
+                printf("*-------------------------CADASTRO CONCLUIDO COM SUCESSO---------------------------------*\n");
+                printf("*----------------------------------------------------------------------------------------*\n");
+
+      break;
+      }
+  }
+
+    return 0;
 }
