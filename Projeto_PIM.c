@@ -165,6 +165,7 @@ int main()
              system("pause");
              system("cls");
             }
+            
          fclose(file);
          break;
          default:
