@@ -161,46 +161,54 @@ int main()
                                 do
                                 {
 
-                                printf ("\n--------------------------------------------------------------------------------\n");
-                                printf("RELATÓRIOS DISPONIVEIS:\n1-Relatório de clientes\n2-Relatório de funcionários\n3-Relatório de serviço\n");
-                                printf ("\n--------------------------------------------------------------------------------\n");
-                                printf("\nDIGITE A SUA OPÇÃO...: ");
-                                scanf("%d", &op );
-                                system("cls");
+                                    printf ("\n--------------------------------------------------------------------------------\n");
+                                    printf("RELATÓRIOS DISPONIVEIS:\n\n1-Relatório de clientes\n2-Relatório de funcionários\n3-Relatório de serviço\n0-Retornar ao menu inicial\n");
+                                    printf ("\n--------------------------------------------------------------------------------\n");
+                                    printf("\nDIGITE A SUA OPÇÃO...: ");
+                                    scanf("%d", &op );
+                                    system("cls");
 
                                 
 
-                                switch (op)
-                                {
+                                    switch (op)
+                                    {
 
-                                case 1:
+                                        case 1:
 
-                                relatorioc();
-                                printf("\n\n");
+                                            relatorioc();
+                                            printf("\n\n");
+                                            system("pause");
+                                            system("cls");
 
-                                    break;
+                                            break;
 
-                                case 2:
+                                        case 2:
 
-                                relatoriof();
-                                printf("\n\n");
+                                            relatoriof();
+                                            printf("\n\n");
+                                            system("pause");
+                                            system("cls");
 
-                                    break;
-                                case 3:
+                                            break;
+                                        case 3:
 
-                                relatorios();
-                                printf("\n\n");
+                                            relatorios();
+                                            printf("\n\n");
+                                            system("pause");
+                                            system("cls");
 
-                                    break;
+                                            break;
                                
-                                default:
-                                    printf("\t\t!OPÇÃO INVÁLIDA!\n");
-                                    printf ("\n--------------------------------------------------------------------------------\n");
-                                    system("pause");
-                                    system("cls");
-                                }    
-                                } while (op<1 || op>4);
-                                system("pause");
+                                        case 0:
+                                            break;
+
+                                        default:
+                                            printf("\t\t!OPÇÃO INVÁLIDA!\n");
+                                            printf ("\n--------------------------------------------------------------------------------\n");
+                                            system("pause");
+                                            system("cls");
+                                    }    
+                                } while (op != 0);
                                 system("cls");    
                         }
                     } while (sair != 0);
@@ -660,78 +668,75 @@ void cad_CNPJ(){
 void relatorioc()
 {
 
-char linha2[9999];
-char*resultado2;
-FILE *file;
+ char linha2[9999];
+ char*resultado2;
+ FILE *file;
 
-file = fopen("clientes.txt", "r");
-if(file == NULL){
-printf("ERROR !! CONTATE O ADIM");
-return 1;
-}   
-printf("*----------------------------------------------------------------------------------------*\n");
-printf("*-----------------------DADOS DOS CLIENTES PRONTOS PARA SEREM TRATADOS-------------------*\n");
-printf("*----------------------------------------------------------------------------------------*\n\n");   
-while(!feof(file))
-{
-resultado2 = fgets(linha2, 9999, file);
-if(resultado2){
-           
-printf("%s", linha2);
-}
-}
-fclose(file);
+ file = fopen("clientes.txt", "r");
+ if(file == NULL){
+ printf("ERROR !! CONTATE O ADIM");
+ return 1;
+ }   
+    printf("*----------------------------------------------------------------------------------------*\n");
+    printf("*-----------------------DADOS DOS CLIENTES PRONTOS PARA SEREM TRATADOS-------------------*\n");
+    printf("*----------------------------------------------------------------------------------------*\n\n");   
+        while(!feof(file))
+        {
+            resultado2 = fgets(linha2, 9999, file);
+            if(resultado2){
+            printf("%s", linha2);
+            }
+        }
+ fclose(file);
 }
 
 void relatoriof()
 {
     
-char linha2[9999];
-char*resultado2;
-FILE *file;
+ char linha2[9999];
+ char*resultado2;
+ FILE *file;
 
-file = fopen("funcionarios.txt", "r");
-if(file == NULL){
-printf("ERROR !! CONTATE O ADIM");
-return 1;
-} 
+ file = fopen("funcionarios.txt", "r");
+ if(file == NULL){
+ printf("ERROR !! CONTATE O ADIM");
+ return 1;
+ } 
 
-printf("*----------------------------------------------------------------------------------------*\n");
-printf("*------------------DADOS DOS FUNCIONÁRIOS PRONTOS PARA SEREM TRATADOS--------------------*\n");
-printf("*----------------------------------------------------------------------------------------*\n\n");
-while(!feof(file))
-{
-resultado2 = fgets(linha2, 9999, file);
-if(resultado2){
-           
-printf("%s", linha2);
-}
-}
-fclose(file);
+    printf("*----------------------------------------------------------------------------------------*\n");
+    printf("*------------------DADOS DOS FUNCIONÁRIOS PRONTOS PARA SEREM TRATADOS--------------------*\n");
+    printf("*----------------------------------------------------------------------------------------*\n\n");
+        while(!feof(file))
+        {
+            resultado2 = fgets(linha2, 9999, file);
+            if(resultado2){
+            printf("%s", linha2);
+            }
+        }
+ fclose(file);
 }
 
 void relatorios()
 {
 
-char linha2[9999];
-char*resultado2;
-FILE *file;
+ char linha2[9999];
+ char*resultado2;
+ FILE *file;
 
-file = fopen("serviço.txt", "r");
-if(file == NULL){
-printf("ERROR !! CONTATE O ADIM");
-return 1;
-}  
-printf("*----------------------------------------------------------------------------------------*\n");
-printf("*--------------------DADOS DE SERVOÇOS PRONTOS PARA SEREM TRATADOS-----------------------*\n");
-printf("*----------------------------------------------------------------------------------------*\n\n");    
-while(!feof(file))
-{
-resultado2 = fgets(linha2, 9999, file);
-if(resultado2){
-           
-printf("%s", linha2);
-}
-}
-fclose(file);
+ file = fopen("serviço.txt", "r");
+ if(file == NULL){
+ printf("ERROR !! CONTATE O ADIM");
+ return 1;
+ }  
+    printf("*----------------------------------------------------------------------------------------*\n");
+    printf("*--------------------DADOS DE SERVOÇOS PRONTOS PARA SEREM TRATADOS-----------------------*\n");
+    printf("*----------------------------------------------------------------------------------------*\n\n");    
+        while(!feof(file))
+        {
+            resultado2 = fgets(linha2, 9999, file);
+            if(resultado2){   
+            printf("%s", linha2);
+            }
+        }
+ fclose(file);
 }
