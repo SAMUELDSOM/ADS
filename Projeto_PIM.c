@@ -30,7 +30,7 @@ int main()
  int cont = 0;
  int op2 = 0;
  FILE *file;
-                    //MENU DE USU√ùRIO
+                    //MENU DE USU¡RIO
     while (op2 == 0)
     {
     printf("*----------------------------------------------------------------------------------------*\n");
@@ -43,7 +43,7 @@ int main()
         switch (cont)
         {
 
-         //TELA DE CADASTRO DE USU√ùRIO
+         //TELA DE CADASTRO DE USU¡RIO
          case 1:
          file = fopen("Usuarios", "a");
             if(file == NULL){
@@ -51,11 +51,11 @@ int main()
              return 1;
             } 
    
-         cadastro(file);//CHAMA A FUN«√O DE CADASTRO DE USU√ùRIO 
+         cadastro(file);//CHAMA A FUN«√O DE CADASTRO DE USU¡RIO 
         
          fclose(file);
          break; 
-     
+         //TELA DE LOGIN
          case 2:
          file = fopen("Usuarios", "r");
             if(file == NULL){
@@ -68,12 +68,11 @@ int main()
          char senha2[20];
          char *retorno;
          int sair = 6;
-            
-         int login_efetuado = 0; //0 - Falso e  1 - Verdadeiro
+         int login_efetuado = 0; 
 
             printf("DIGITE SEU USU¡RIO..: ");
             scanf("%s", login);
-            system("cls");                     //TELA DE LOGIN
+            system("cls");                     
             printf("DIGITE SUA SENHA..: ");
             scanf("%s", senha1); 
             system("cls");
@@ -102,7 +101,7 @@ int main()
                         {
                             case 1:
 
-                                cliente();
+                                cliente(); //CHAMA A FUN«√O PARA CADASTRO DE CLIENTES
                             
 
                                 break;
@@ -119,7 +118,7 @@ int main()
                                     return 1;
                                 }                               
 
-                                    servico(file);
+                                    servico(file); //CHAMA A FUN«√O PARA ABERTURA DE ORDEM DE SERVI«O
 
                             
                                 
@@ -133,7 +132,7 @@ int main()
                                 file = fopen("serviÁo.txt","a+");
 
                                 while(!feof(file))
-                                {
+                                {                                           //CONTABILIZA A QUANTIDADE DE ORDENS DE SERVI«O ABERTAS
                                     resultado = fgets(linha, 9999, file);
                                     if(resultado){
                                         contador = contador + 1;
@@ -146,7 +145,7 @@ int main()
                                     printf("N˙mero da OS: A/%d\n", contador);
                                     printf("Nome do funcion·rio: %s\n", funcio);
                                     printf("Nome do cliente: %s\n", clint);
-                                    printf("Componente a ser revisado: %s\n", nome_comp);
+                                    printf("Componente a ser revisado: %s\n", nome_comp);       //RESUMO DA OS
                                     printf("Tipo de Revis„o: %s\n", tipo_serv);
                                     printf("Data de abertura da ORDEM DE SERVI«O: %s\n", date);
                                     printf("Valor final a ser pago: R$ %.3f", valor);
@@ -175,7 +174,7 @@ int main()
 
                                         case 1:
 
-                                            relatorioc();
+                                            relatorioc();       //CHAMA A FUN«√O PARA GERAR UMA BASE DE DADOS DE CLIENTES CADASTRDOS
                                             printf("\n\n");
                                             system("pause");
                                             system("cls");
@@ -184,7 +183,7 @@ int main()
 
                                         case 2:
 
-                                            relatoriof();
+                                            relatoriof();       //FUN«√O PARA GERAR UMA BASE DE DADOS DE FUNCION¡RIOS
                                             printf("\n\n");
                                             system("pause");
                                             system("cls");
@@ -192,7 +191,7 @@ int main()
                                             break;
                                         case 3:
 
-                                            relatorios();
+                                            relatorios();       //FUN«√O PARA GERAR UMA BASE DE DADOS DE ORDENS DE SERVI«O ABERTAS
                                             printf("\n\n");
                                             system("pause");
                                             system("cls");
@@ -200,7 +199,7 @@ int main()
                                             break;
                                
                                         case 0:
-                                            break;
+                                            break;              //RETORNA AO MENU PRINCIPAL
 
                                         default:
                                             printf("\t\t!OP«√O INV¡LIDA!\n");
@@ -244,7 +243,7 @@ void cadastro(FILE *fi)
      gets(nome);
      printf("ESCOLHA UM NOME DE USU¡RIO..:\n");
      gets(nome);
-     fprintf(fi, "%s ; ", nome);
+     fprintf(fi, "%s ; ", nome);            //DADOS DO USU¡RIO
      system("cls");
      printf("CRIE UMA SENHA..:\n");
      gets(senha);
@@ -260,8 +259,8 @@ void cadastro(FILE *fi)
             while (opcao == 1)
             {
                 printf("*----------------------------------------------------------------------------------------*\n");
-                printf("Nome de usu·rio: %s\n", nome);
-                printf("Senha: %s\n", senha);
+                printf("Nome de usu·rio: %s\n", nome);      
+                printf("Senha: %s\n", senha);       //RESUMO DO CADASTRO
                 system("pause");
                 system("cls");
                 printf("*----------------------------------------------------------------------------------------*\n");
@@ -274,7 +273,7 @@ void cadastro(FILE *fi)
         }
     } while (opcao == 0);
 }
-//FUN«√O PARA ABERTURA DE ORDEM DE SERVI√áO
+//FUN«√O PARA ABERTURA DE ORDEM DE SERVI«O
 void servico(FILE *fl)
 {
     int comp, tserv;
@@ -300,7 +299,7 @@ void servico(FILE *fl)
             scanf("%d", &comp);
             system("cls");
 
-            switch (comp)
+            switch (comp)           //ESCOLHA DO COMPONENTE PARA REVIS√O
             {
                 case 1:
                     nome_comp = "Distribuidora";
@@ -369,11 +368,11 @@ void servico(FILE *fl)
             scanf("%d", &tserv);
             system("cls"); 
 
-            switch (tserv)
+            switch (tserv)      //ESCOLHA DO TIPO DE REVIS√O
             {
                 case 1:
                     tipo_serv = "Revis„o geral";
-                        if (strcmp(nome_comp, "Distribuidora") == 0){
+                        if (strcmp(nome_comp, "Distribuidora") == 0){       //PRE«OS J¡ PR…-ESTABELECIDOS
                             valor = 1.800;
                         }
                             if (strcmp(nome_comp, "Bomba de combustivel") == 0){
@@ -395,7 +394,7 @@ void servico(FILE *fl)
                             valor = 2.300;
                         }
                     fprintf(fl, "%s ; ", tipo_serv);
-                    fprintf(fl, "%.3f ; ", valor);         
+                    fprintf(fl, "%.3f ; ", valor);         //RESUMO DA ESCOLHA
                     printf("O tipo de Revis„o escolida foi uma %s, no valor de R$ %.3f", tipo_serv, valor);
                     printf ("\n--------------------------------------------------------------------------------\n\n");
                     break;
@@ -496,7 +495,7 @@ void servico(FILE *fl)
                 system("cls");
         }
             gets(date);       
-            printf("DATA DE ABERTURA DA ORDEM DE SERVI«O(dd/mm/yyyy)..: ");
+            printf("DATA DE ABERTURA DA ORDEM DE SERVI«O(dd/mm/yyyy)..: ");     //REGISTRANDO DATA DE ABERTURA
             gets(date);
             fprintf(fl, "%s ; ", date);
             system("pause");
@@ -664,7 +663,7 @@ void cad_CNPJ(){
       
 }
 
-
+//FUN«√O PARA GERAR UMA BASE DE DADOS DE CLIENTES CADASTRDOS
 void relatorioc()
 {
 
@@ -689,7 +688,7 @@ void relatorioc()
         }
  fclose(file);
 }
-
+//FUN«√O PARA GERAR UMA BASE DE DADOS DE FUNCION¡RIOS
 void relatoriof()
 {
     
@@ -715,7 +714,7 @@ void relatoriof()
         }
  fclose(file);
 }
-
+//FUN«√O PARA GERAR UMA BASE DE DADOS DE ORDENS DE SERVI«O ABERTAS
 void relatorios()
 {
 
