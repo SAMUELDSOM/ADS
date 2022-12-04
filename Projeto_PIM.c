@@ -16,9 +16,10 @@ char*nome_comp=NULL;
 char*tipo_serv=NULL;
 float valor;
 
+int funcionarios();
 void cadastro();
 void servico();
-void cliente();
+void cliente();         //FUNÇÕES UTILIZADAS NO CÓDIGO
 void relatorioc();
 void relatoriof();
 void relatorios();
@@ -34,7 +35,7 @@ int main()
     while (op2 == 0)
     {
     printf("*----------------------------------------------------------------------------------------*\n");
-    printf("*------------------------------------CodeAir---------------------------------------------*\n");
+    printf("*------------------------------------AIRcoDe---------------------------------------------*\n");
     printf("*------------------(CADASTRAR UM USUÁRIO = 1)--(FAZER LOGIN = 2)-------------------------*\n");
     printf("\nDIGITE A SUA OPÇÃO...:");
     scanf("%d", &cont);
@@ -88,10 +89,10 @@ int main()
                         printf("|\t\tMENU INICIAL             |\n");
                         printf("+----------------------------------------+\n");
                         printf("|1 - Cadastrar cliente                   |\n");//Lucas
-                        printf("|2 - Cadastrar funcionário               |\n");//Kaue
+                        printf("|2 - Menu de colaboradores               |\n");//Kaue
                         printf("|3 - Nova ordem de serviço               |\n");//Samuel
                         printf("|4 - Relatórios                          |\n");//Samuel e Vieira
-                        printf("|0 - Para retornar a tela de login       |\n");
+                        printf("|0 - Para retornar a tela de login(sair) |\n");
                         printf("+----------------------------------------+\n");
                         printf("\nDIGITE A SUA OPÇÃO...:");
                         scanf("%d", &sair);
@@ -107,7 +108,7 @@ int main()
                                 break;
                             case 2:
 
-                            
+                                funcionarios();
                             
                                 break;
                             case 3:
@@ -738,4 +739,241 @@ void relatorios()
             }
         }
  fclose(file);
+}
+
+int funcionarios()
+{
+    //Declaração das variáveis usada durante todo o programa//
+ 
+ int opc,mest,fven, motivo, mestA,mes,mes2,diast; //Variáveis do tipo inteira
+ float sal,vtotal,sal6,sal3,sal2,total2,decimo,parcela,rescisao,hr,hre,extra,sal4,extra1,sal5,ferias; //vaiáveis que armazenam uma quantidade maior de casas decimais//
+ char nome[100],cpf[20],cart[35],salario[35],num[12],loja[47],car[35];// Váriaveis do tipo inteira//
+ char linha; //Usado para o arquivo//
+ char*resultado; //Usado para o arquivo//
+ FILE*funcionarios; //Usado para o arquivo//
+ 
+    do
+    {
+
+        printf("\n\n*---------------------------------------------------------------------------------------------*\n");
+        printf("------------------------BEM VINDO A TELA DE MENU GERAL DE COLABORADORES------------------------\n");//tela de cadastro e consulta de colaborador 
+        printf("-----------------------------------------------------------------------------------------------\n\n\n");
+        //Opção que o usuário escolhe para execução do programa
+        printf("1-CADASTRO DE COLABORADOR\n2-CÁLCULO DE DÉCIMO TERCEIRO\n3-CÁLCULO DE RESCISÃO\n4-CÁLCULO DE HORAS EXTRAS\n5-CÁLCULO DE FÉRIAS\n0-PARA VOLTAR AO MENU INICIAL\n\nDIGITE O QUE DESEJA: ");
+        scanf("%d", &opc);
+        system("cls");
+
+     switch (opc)
+     {
+        case 1:
+        
+            system("cls"); //Limpando o que foi executado na tela aterior
+        
+            //abrindo arquivo para salvar dados dos funcionários
+            funcionarios=fopen ("funcionarios.txt", "a"); 
+                if (funcionarios==NULL)
+                {
+                    printf("erro na execução"); //Escrevendo para o usuário que aconteceu um erro no arquivo
+                    return 1;
+                }
+        
+            //Tela cadastro do funcionário onde pede informações essencias para armazenamento no arquivo txt
+            gets(nome);
+            printf ("DIGITE O NOME COMPLETO: "); //função de texto onde é imprimido informações na tela do usuário
+            gets(nome); //leitura de caracteres digitado pelo usuário
+            fprintf(funcionarios,"%s ; ",nome); // armazenamento da leitura escrita pelo usuário no arquivo
+            fflush(stdin); //limpando os espaço salvo anterior
+            system("cls");
+            printf ("CPF: ");
+            gets(cpf);
+            fprintf(funcionarios,"%s ; ",cpf);
+            fflush(stdin);
+            system("cls");
+            printf ("NUMERO DA CARTEIRA DE TRABALHO: ");;
+            gets(cart);
+            fprintf(funcionarios,"%s ; ",cart);
+            fflush(stdin);
+            system("cls");
+            printf ("LOCAL DE TRABALHO(LOJA): ");
+            gets(loja);
+            fprintf(funcionarios,"%s ; ",loja);
+            fflush(stdin);
+            system("cls");
+            printf ("CARGO/FUNÇÃO: ");
+            gets(car);
+            fprintf(funcionarios,"%s ; ",car);
+            fflush(stdin);
+            system("cls");
+            printf ("SALÁRIO BRUTO: ");
+            gets(salario);
+            fprintf(funcionarios,"%s ; ",salario);
+            fflush(stdin);
+            system("cls");
+            printf ("TELEFONE PARA CONTATO:");
+            gets(num);
+            fprintf(funcionarios,"%s\n",num);
+            fflush(stdin);
+            system("cls");
+            //informação para que refaça novamente o cadastro, caso o usuário digite 1, ou finalize o processo caso digite 2
+            printf("\nPARABÉNS, CADASTRO REALIZADO COM SUCESSO!\n\n");
+            system("pause");
+            system("cls");
+            //Fechamento de arquivo txt//
+            fclose(funcionarios);
+        break;
+    
+
+        case 2: //PARA CÁCULO DE DÉCIMO TERCEIRO//
+            system("cls");
+            printf("\nQUANTIDADE DE MESES TRABALHADO NO ANO ATUAL: ");
+            scanf("%d", &mes);
+            system("cls");
+            printf("DIGITE O SALÁRIO BRUTO: ");
+            scanf("%f", &sal2);
+            decimo=(sal2/12)*mes;//Dividindo o salário por 12 e multiplicando pela quantidade de meses trabalhado dentro do ano//
+            parcela=decimo/2; //Dividindo o décimo por dois para mostrar o valor de cada parcela//
+            system("cls");
+            printf("\nO VALOR TOTAL DO DÉCIMO É DE: R$%.2f\n\nSENDO 1ª PARCELA DE: R$%.2f E SEGUNDA PARCELA DE: R$%.2f\n\n",decimo,parcela,parcela);
+            system("pause");
+            system("cls");
+        break;
+
+        case 3: //Cálculo para rescisão//
+            system("cls");
+            printf("MOTIVO\n1. DISPENSA SEM JUSTA CAUSA\n2. DISPENSA COM JUSTA CAUSA\n3. PEDIDO DE DEMISSÃO\n\nDIGITE O MOTIVO:");
+            scanf("%d",&motivo);
+                if (motivo==1)
+                {
+                    system("cls");
+                    printf("DIGITE O SALÁRIO BRUTO: ");
+                    scanf("%f", &sal3);
+                    system("cls");
+                    printf("\nQUANTIDADE DE MESES TRABALHADO NO TOTAL NA EMPRESA: ");
+                    scanf("%d", &mes2);
+                    system("cls");
+                    printf("\nQUANTIDADE DE MESES TRABALHADO NO ANO ATUAL: ");
+                    scanf("%d", &mestA);
+                    system("cls");
+                    printf("\nQUANTIDADE DE DIAS TRABALHADO NO MÊS DA DEMISSÃO: ");
+                    scanf("%d", &diast);
+                    system("cls");
+                    printf("\nEXISTE FÉRIAS VENCIDAS\n1. SIM\n2. NÃO\n:");
+                    scanf("%d",&fven);
+                        if(fven==1)//Cálculos de rescisão caso seja demitido pela empresa e existe férias vencidas
+                        { 
+                            rescisao=sal3; //Aviso prévio é o valor do salário
+                            rescisao=rescisao+((sal3/30)*mest); //Salário proporcional aos dias trabalhado
+                            rescisao=rescisao+(sal3/3)+sal3; //Férias vencida 
+                            rescisao=rescisao+((sal3/12)*mestA); //Décimo proporcional aos dias trabalhado
+                            rescisao=rescisao+((sal3*8/100)*mes2)*1.4; //Valor do FGTS proporcional mais a multa
+                        }
+                        if(fven==2)//Cálculos de rescisão caso seja demitido pela empresa e não existe férias vencidas
+                        {
+                            rescisao=sal3; //Aviso prévio é o valor do salário
+                            rescisao=rescisao+((sal3/30)*diast); //Salário proporcional aos dias trabalhado
+                            rescisao=rescisao+((sal3/12)*mestA); //Décimo proporcional aos dias trabalhad
+                            rescisao=rescisao+((sal3*8/100)*mes2)*1.4; //Valor do FGTS proporcional mais a multa
+                        }
+                }        
+                if (motivo==2)
+                {
+                    system("cls");
+                    printf("DIGITE O SALÁRIO BRUTO: ");
+                    scanf("%f", &sal3);
+                    system("cls");
+                    printf("QUANTIDADE DE DIAS TRABALHADO: ");
+                    scanf("%d", &diast);
+                    system("cls");
+                    printf("\nEXISTE FÉRIAS VENCIDAS\n1. SIM\n2. NÃO\n:");
+                    scanf("%d",&fven);
+                        if(fven==1)//Cálculos de rescisão caso seja demitido pela empresa e existe férias vencidas
+                        {     
+                            rescisao=(sal3/30)*diast; //Salário proporcional aos dias trabalhado
+                            rescisao=rescisao+(sal3/3)+sal3; //Férias vencida 
+                        }
+                        if(fven==2)//Cálculos de rescisão caso seja demitido pela empresa e existe férias vencidas
+                        { 
+                            rescisao=(sal3/30)*diast; //Salário proporcional aos dias trabalhado
+                        }
+                }
+                if (motivo==3)
+                {
+                    system("cls");
+                    printf("DIGITE O SALÁRIO BRUTO: ");
+                    scanf("%f", &sal3);
+                    system("cls");
+                    printf("\nQUANTIDADE DE MESES TRABALHADO NO TOTAL NA EMPRESA: ");
+                    scanf("%d", &mes2);
+                    system("cls");
+                    printf("\nQUANTIDADE DE MESES TRABALHADO NO ANO ATUAL: ");
+                    scanf("%d", &mestA);
+                    system("cls");
+                    printf("\nQUANTIDADE DE DIAS TRABALHADO NO MÊS DA DEMISSÃO: ");
+                    scanf("%d", &diast);
+                    system("cls");
+                    printf("\nEXISTE FÉRIAS VENCIDAS\n1. SIM\n2. NÃO\n:");
+                    scanf("%d",&fven);
+                        if(fven==1)//Cálculos de rescisão caso seja demitido pela empresa e existe férias vencidas
+                        {
+                            rescisao=sal3; //Aviso prévio é o valor do salário
+                            rescisao=rescisao+((sal3/30)*mest); //Salário proporcional aos dias trabalhado
+                            rescisao=rescisao+(sal3/3)+sal3; //Férias vencida 
+                            rescisao=rescisao+((sal3/12)*mestA); //Décimo proporcional aos dias trabalhado
+                        }
+                        if(fven==2)//Cálculos de rescisão caso seja demitido pela empresa e não existe férias vencidas
+                        {
+                            rescisao=sal3; //Aviso prévio é o valor do salário
+                            rescisao=rescisao+((sal3/30)*diast); //Salário proporcional aos dias trabalhado
+                            rescisao=rescisao+((sal3/12)*mestA); //Décimo proporcional aos dias trabalhad
+                        }
+                }
+            system("cls");
+            printf("\nO VALOR TOTAL DA RESCISÃO É DE: R$%.2f\n\n",rescisao);
+            system("pause");
+            system("cls");
+        break;
+
+        case 4: //Cálculo para horas extras//
+            system("cls");
+            printf("\nQUANTIDADE DE HORAS FIXAS MENSAIS PROPOSTAS: ");
+            scanf("%f", &hr);
+            system("cls");
+            printf("QUANTIDADE DE HORAS EXTRAS: ");
+            scanf("%f", &hre);
+            system("cls");
+            printf("DIGITE O VALOR DO SALÁRIO BRUTO: ");
+            scanf("%f", &sal4);
+            extra=(sal4/hr)*1.5*hre; //Dividindo  salário pela quantidade de horas mensais, multiplicando por 50% e multiplicando por horas extras//
+            extra1=extra+sal4; //somando o salário mais o total de hora extras que devem ser pagos//
+            system("cls");
+            printf("\nO VALOR TOTAL COM HORAS EXTRAS QUE DEVE SER PAGO É DE: R$%.2f\n\nSENDO O SALÁRIO DE R$%.2f MAIS O VALOR DE HORAS EXTRAS DE R$%.2f\n\n",extra1,sal4,extra);
+            system("pause");
+            system("cls");
+        break;
+
+        case 5:// cálculo para férias//
+            system("cls");
+            printf("\nDIGITE O SALÁRIO BRUTO: ");
+            scanf("%f", &sal5);
+            system("cls");
+            ferias=sal5/3; //Dividindo o salário por 3//
+            vtotal=(sal5/3)+sal5; //dividindo o salário por 3 e somando junto com salário//
+            system("cls");
+            printf("\nO VALOR TOTAL DE R$%.2f\n\nSENDO O SALÁRIO DE R$%.2f MAIS O VALOR DE FÉRIAS QUE SÃO R$%.2f\n\n",vtotal,sal5,ferias);
+            system("pause");
+            system("cls");
+        break;
+
+        case 0:
+            break;
+
+        default:
+            printf("\t\t!OPÇÃO INVÁLIDA!\n");
+            printf ("\n--------------------------------------------------------------------------------\n");
+            system("pause");
+            system("cls");
+     }    
+    } while (opc != 0);
+    //Fim da execução do menu de colaborador//
+    return 0;
 }
