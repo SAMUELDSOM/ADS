@@ -1,2 +1,2 @@
 # ADS
-Este repositorio consiste em exercícios passados ao longo do curso de Análise e desenvolvimento de sistemas. 
+Este repositorio consiste em projetos a serem realizados ao longo do curso de Análise e desenvolvimento de sistemas. 
